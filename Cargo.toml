@@ -1,0 +1,8 @@
+[package]
+name = "good_good_bot_bot_bot"
+version = "0.1.0"
+authors = ["Lancelot Owczarczak <contact@lancelot.life>"]
+edition = "2018"
+
+[dependencies]
+rust_twitter_bot_lib = "0.1.2"
