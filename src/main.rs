@@ -10,7 +10,7 @@ fn good_bot_bot_last_tweet(bot: &TwitterBot, since_id: Option<&str>) -> Option<T
         params.insert("since_id", since_id);
     }
 
-    if let Ok(last_tweet) = bot.get_tweets_query("from:GoodBotBot1", Some(params)) {
+    if let Ok(last_tweet) = bot.get_tweets_query("from:GoodBotBot1 to:XKCDAltTextBot \"Good Bot.\"", Some(params)) {
         return last_tweet.into_iter().next();
     }
     None
@@ -33,6 +33,10 @@ fn main() {
         .secret_access_token(env!("SECRET_ACCESS_TOKEN"));
 
     let mut since_id = good_bot_bot_last_tweet(&bot, None).map(|elem| elem.id().to_string());
+
+    if let Some(since_id) = since_id.clone() {
+        println!("Find latest tweet: {}", since_id);
+    }
 
     loop {
         sleep(Duration::from_secs(15));
