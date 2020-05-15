@@ -10,7 +10,7 @@ fn good_bot_bot_last_tweet(bot: &TwitterBot, since_id: Option<&str>) -> Option<T
         params.insert("since_id", since_id);
     }
 
-    if let Ok(last_tweet) = bot.get_tweets_query("from:GoodBotBot1 to:XKCDAltTextBot \"Good Bot.\"", Some(params)) {
+    if let Ok(last_tweet) = bot.get_tweets_query("from:GoodBotBot1 to:XKCDAltTextBot \"Good Bot.\" -filter:retweets", Some(params)) {
         return last_tweet.into_iter().next();
     }
     eprintln!("Error: GoodGoodBotBotBot Couldn't get tweets :'(");
@@ -44,7 +44,7 @@ fn main() {
     loop {
         sleep(Duration::from_secs(15));
         if let Some(new_tweet_id) = good_bot_bot_last_tweet(&bot, (&since_id).as_deref()).map(|elem| elem.id().to_string()) {
-            println!("New Tweet !");
+            println!("New Tweet : {}", new_tweet_id);
             reply_to_good_bot_bot(&bot, &new_tweet_id);
             since_id = Some(new_tweet_id);
         }
