@@ -13,6 +13,7 @@ fn good_bot_bot_last_tweet(bot: &TwitterBot, since_id: Option<&str>) -> Option<T
     if let Ok(last_tweet) = bot.get_tweets_query("from:GoodBotBot1 to:XKCDAltTextBot \"Good Bot.\"", Some(params)) {
         return last_tweet.into_iter().next();
     }
+    eprintln!("Error: GoodGoodBotBotBot Couldn't get tweets :'(");
     None
 }
 
@@ -32,6 +33,8 @@ fn main() {
         .access_token(env!("ACCESS_TOKEN"))
         .secret_access_token(env!("SECRET_ACCESS_TOKEN"));
 
+    println!("GoodGoodBotBotBot launched :D");
+    
     let mut since_id = good_bot_bot_last_tweet(&bot, None).map(|elem| elem.id().to_string());
 
     if let Some(since_id) = since_id.clone() {
